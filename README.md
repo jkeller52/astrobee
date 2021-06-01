@@ -22,11 +22,7 @@ This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the p
 
 
 
-
-
-
-
-
+#### NASA Original Documentation Begins Here
 
 
 
