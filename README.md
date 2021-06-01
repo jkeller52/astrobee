@@ -1,11 +1,12 @@
 # Astrobee Robot Software
-##CSEL README.MD
+## CSEL README.MD
 
-https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0
+[Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
 
 Issue installing Luajit20:
 'sudo apt install libluajit-5.1-dev'
-
+This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the package was installed and build instructions were followed. 
+[Luajit Documentation](http://luajit.org/download.html)
 
 
 
