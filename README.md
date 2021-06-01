@@ -3,11 +3,26 @@
 
 [Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
 
-Issue installing Luajit20:
+
+Error message I kept getting:
+libcuda.so.1 is not a symbolic link
+
+Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
+
+## Installing Dependencies
+
+# Protoc
+Error: Protoc not found
+[Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
+
+# Luajit20
+Issue finding Luajit20:
 'sudo apt install libluajit-5.1-dev'
 This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the package was installed and build instructions were followed. 
 [Luajit Documentation](http://luajit.org/download.html)
 
+# OpenCV
+[Installing OpenCV on Ubuntu 16.04](http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/)
 
 
 
