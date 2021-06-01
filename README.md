@@ -1,13 +1,34 @@
 # Astrobee Robot Software
 ## CSEL README.MD
 
+#Windows Subsystem for Linux Configuration
+If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
+I used Windows Subsystem for Linux 2 (WSL2) to act as an Ubuntu 16.04 VM. This required installation of the NVIDIA CUDA Graphics Driver
+
+In your Ubuntu terminal: run the following commands:
+`$wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
+$sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$wget https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda-repo-ubuntu1604-11-3-local_11.3.1-465.19.01-1_amd64.deb
+$sudo dpkg -i cuda-repo-ubuntu1604-11-3-local_11.3.1-465.19.01-1_amd64.deb
+$sudo apt-key add /var/cuda-repo-ubuntu1604-11-3-local/7fa2af80.pub
+$sudo apt-get update
+$sudo apt-get -y install cuda`
+
+
+
 [Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
+
+
+
 
 
 Error message I kept getting:
 libcuda.so.1 is not a symbolic link
 
-Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
+Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
+
+
+
 
 ## Installing Dependencies
 
@@ -24,6 +45,16 @@ This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the p
 # OpenCV
 [Installing OpenCV on Ubuntu 16.04](http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/)
 
+I encountered a problem after following this tutorial that read:
+`jkell@DESKTOP-CSDA0LG:~$ pkg-config --modversion opencv
+Package opencv was not found in the pkg-config search path.
+Perhaps you should add the directory containing opencv.pc
+to the PKG_CONFIG_PATH environment variable
+No package 'opencv' found`
+
+
+
+Running 'sudo apt install libopencv-dev' fixed this issue for me.
 
 
 
