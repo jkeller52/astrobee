@@ -229,7 +229,7 @@ Call Stack (most recent call first):
 
 `sudo apt-get install libargtable2-dev` fixed this error. 
 
-At this point, it seems that the issue is the dev packages for the dependencies not being installed correctly. I can see the ones I still need to install at ~/astrobee/cmake/.
+At this point, it seems that the issue is the dev packages for the dependencies not being installed correctly. I can see the ones I still need to install at ~/astrobee/cmake/. Trying to reinstall build-essential didn't fix it. 
 
 
 
@@ -253,6 +253,32 @@ Call Stack (most recent call first):
 -- Configuring incomplete, errors occurred!
 See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
 ```
+
+
+`ImportError: No module named catkin.environment_cache` is the most important part of this output, so we'll start there.
+Seems to be an issue with PYTHONPATH for catkin... I need to install pip and then 'catkin_pkg'
+```
+sudo apt-get install pip
+pip install catkin_pkg
+```
+
+Moment of truth: `jkell@DESKTOP-CSDA0LG:~/astrobee$ ./scripts/configure.sh -l -F -D`
+Output:
+```
+Traceback (most recent call last):
+  File "/home/jkell/astrobee_build/native/catkin_generated/generate_cached_setup.py", line 19, in <module>
+    from catkin.environment_cache import generate_environment_script
+ImportError: No module named catkin.environment_cache
+CMake Error at cmake/catkin/safe_execute_process.cmake:11 (message):
+  execute_process(/usr/bin/python
+  "/home/jkell/astrobee_build/native/catkin_generated/generate_cached_setup.py")
+  returned error code 1
+Call Stack (most recent call first):
+  cmake/catkin/all.cmake:185 (safe_execute_process)
+  cmake/catkin2Config.cmake:37 (include)
+  CMakeLists.txt:311 (find_package)
+```
+This seems to be a common hair-pulling issue for installing ROS Melodic. 
 
 
 
