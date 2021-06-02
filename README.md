@@ -156,9 +156,65 @@ Also no luck.
 Then tried `sudo apt install libusb-dev`. No luck there.
 
 
+This worked: (!!)
+```
+sudo apt-get install libusb-1.0-0-dev
+```
+ New Output:
+ ```
+ jkell@DESKTOP-CSDA0LG:~/astrobee$ ./scripts/configure.sh -l -F -D
+configuring for native linux...
+Remove the CMake Cache for /home/jkell/astrobee_build/native
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/home/jkell/astrobee_install/native -DUSE_DDS=off -DENABLE_PICOFLEXX=off /home/jkell/astrobee
+ROS distro variable not set. Trying to figure it out...
+-- Performing Test COMPILER_SUPPORTS_CXX11
+-- Performing Test COMPILER_SUPPORTS_CXX11 - Success
+-- Performing Test COMPILER_SUPPORTS_CXX0X
+-- Performing Test COMPILER_SUPPORTS_CXX0X - Success
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp
+-- Found Glog: /usr/include
+-- Performing Test GFLAGS_IN_GOOGLE_NAMESPACE
+-- Performing Test GFLAGS_IN_GOOGLE_NAMESPACE - Success
+-- Found Gflags: /usr/include
+-- Found Threads: TRUE
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+-- Found ceres: /usr/lib/libceres.so
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.8")
+-- Found Luajit20: /usr/local/lib/libluajit-5.1.so;/usr/lib/x86_64-linux-gnu/libm.so (found version "2.0.4")
+-- Found OpenCV: /usr/local (found suitable version "3.4.10", minimum required is "3")
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   serialization
+--   system
+--   filesystem
+--   thread
+--   program_options
+--   date_time
+--   timer
+--   chrono
+--   regex
+--   atomic
+-- GTSAM include directory:  /usr/share/gtsam/cmake/../../../include
+-- Found jsoncpp: /usr/include/jsoncpp
+-- Found USB: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
+CMake Error at /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
+  Could NOT find JSONC (missing: JSONC_LIBRARY JSONC_INCLUDE_DIR)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:388 (_FPHSA_FAILURE_MESSAGE)
+  cmake/FindJSONC.cmake:39 (find_package_handle_standard_args)
+  CMakeLists.txt:256 (find_package)
 
 
-
+-- Configuring incomplete, errors occurred!
+See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
+```
+It seems unable to find JSONC now. Ugh. 
 
 -----
 #### NASA Original Documentation Begins Here
