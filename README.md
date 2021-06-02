@@ -50,17 +50,17 @@ Resolved this error message by folling [these instructions](https://askubuntu.co
 
 # Installing Dependencies
 
-#### Protoc
+### Protoc
 Error: Protoc not found
 [Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
 
-#### Luajit20
+### Luajit20
 Error: Luajit20 not found
 `sudo apt install libluajit-5.1-dev`
 This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the package was installed and build instructions were followed. 
 [Luajit Documentation](http://luajit.org/download.html)
 
-#### OpenCV
+### OpenCV
 [Installing OpenCV on Ubuntu 16.04](http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/)
 
 I encountered a problem after following this tutorial when trying to verify that opencv was installed correctly:
@@ -97,7 +97,8 @@ cd ~/astrobee
 ./scripts/configure.sh -l -F -D
 ```
 
-My output read:
+### LibUSB
+After the above step, my new output read:
 ```
 jkell@DESKTOP-CSDA0LG:~/astrobee$ ./scripts/configure.sh -l -F -D
 configuring for native linux...
@@ -232,7 +233,13 @@ See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
 ```
 It seems unable to find JSONC now. Ugh.
 
-Trying `sudo apt-get install libjson0 libjson0-dev` This worked. New Error:
+### JSONC
+Tried `sudo apt-get install libjson0 libjson0-dev` This worked. 
+
+
+
+### ARGTABLE2
+New Error:
 
 ```
 CMake Error at /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
@@ -249,8 +256,8 @@ At this point, it seems that the issue is the dev packages for the dependencies 
 
 
 
-
-New Error:
+### catkin.environment_cache
+Error Message:
 ```
 Traceback (most recent call last):
   File "/home/jkell/astrobee_build/native/catkin_generated/generate_cached_setup.py", line 19, in <module>
@@ -308,6 +315,22 @@ Once you have added that repository, run these commands to install catkin_tools:
 $ sudo apt-get update
 $ sudo apt-get install python-catkin-tools
 ```
+
+still haven't gotten past this hurdle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
