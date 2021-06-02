@@ -48,19 +48,19 @@ Resolved this error message by folling [these instructions](https://askubuntu.co
 
 
 
-## Installing Dependencies
+# Installing Dependencies
 
-# Protoc
+#### Protoc
 Error: Protoc not found
 [Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
 
-# Luajit20
-Issue finding Luajit20:
-'sudo apt install libluajit-5.1-dev'
+#### Luajit20
+Error: Luajit20 not found
+`sudo apt install libluajit-5.1-dev`
 This resolved the Ubuntu 16.04 WSL2 VM's issue finding Luajit, even though the package was installed and build instructions were followed. 
 [Luajit Documentation](http://luajit.org/download.html)
 
-# OpenCV
+#### OpenCV
 [Installing OpenCV on Ubuntu 16.04](http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/)
 
 I encountered a problem after following this tutorial when trying to verify that opencv was installed correctly:
@@ -71,7 +71,7 @@ Perhaps you should add the directory containing `opencv.pc`
 to the PKG_CONFIG_PATH environment variable
 No package 'opencv' found
 ```
-Running `sudo apt install libopencv-dev` fixed this issue for me, displaying the version of opencv I had installed:
+Running `sudo apt install libopencv-dev` fixed this issue for me. When I checked the version of opencv I had installed it worked correctly:
 ```
 jkell@DESKTOP-CSDA0LG:~$ pkg-config --modversion opencv
 2.4.9.1
