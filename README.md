@@ -2,7 +2,7 @@
 # Cognitive Systems Engineering Laboratory README.MD
 This repository document installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation for the development of an experimental human-machine teaming testbed.
 
-# Windows Subsystem for Linux Configuration
+## Windows Subsystem for Linux Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
 I used Windows Subsystem for Linux 2 (WSL2) to act as an Ubuntu 16.04 VM. This required installation of the NVIDIA CUDA Graphics Driver
 
