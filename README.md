@@ -1,10 +1,25 @@
 
-# Cognitive Systems Engineering Laboratory README.MD
-This repository document installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation for the development of an experimental human-machine teaming testbed.
+# Astrobee Software Installation and Configuration
+This repository documents installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation. The Cognitive Systems Engineering Laboratory at Ohio State University is currently exploring the development of an experimental human-machine teaming testbed using ROS and Gazebo, prompting exploration into NASA's open source astrobee software.
 
-## Windows Subsystem for Linux Configuration (Optional)
+If you are unfamiliar with astrobee, please refer to [NASA's official documentation](). This repository addresses the cracks in NASA's official documentation, supporting and troubleshooting the install of astrobee simulation capabilities on both native Ubuntu 16.04 and Ubuntu 16.04 ran via Windows Subsystem for Linux 2 (WSL2). 
+
+
+Contents
+- [Operating System]()
+- [Installation Instructions]()
+- [Use]()
+
+
+## Operating System
+
+
+
+
+
+### Windows Subsystem for Linux Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
-I used Windows Subsystem for Linux 2 (WSL2) to act as an Ubuntu 16.04 VM. This required installation of the NVIDIA CUDA Graphics Driver
+I used Windows Subsystem for Linux 2 (WSL2) to act as an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](). Your GPU may have different driver requirements.
 
 In your Ubuntu terminal: run the following commands:
 ```
