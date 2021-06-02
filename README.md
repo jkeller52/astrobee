@@ -134,9 +134,26 @@ Call Stack (most recent call first):
 -- Configuring incomplete, errors occurred!
 See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
 ```
-Better... Now to troubleshhot my new errors.
+Better... Now to troubleshoot my new errors. Seems that it can't find libusb
+
+I attempted to fix this by running `sudo apt-get install libpng-dev libimlib2-dev`. No luck.
 
 
+Then tried installing these dependencies 
+
+```
+sudo apt-get install libxext-dev
+sudo apt-get install libpng-dev
+sudo apt-get install libimlib2-dev
+sudo apt-get install libglew-dev
+sudo apt-get install libxrender-dev
+sudo apt-get install libxrandr-dev
+sudo apt-get install libglm-dev
+```
+Also no luck. 
+
+
+Then tried `sudo apt install libusb-dev`. No luck there.
 
 
 
