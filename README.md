@@ -7,7 +7,9 @@ If you are unfamiliar with astrobee, please refer to [NASA's official documentat
 Contents
 - [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
 - [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
-- [Use]()
+- [Missing Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#installing-dependencies)
+- [Use Case](https://github.com/jkeller52/astrobee/blob/master/README.md#use-case)
+- [Original NASA Documentation]()
 
 
 ## Operating System
@@ -32,7 +34,7 @@ $sudo apt-get update
 $sudo apt-get -y install cuda
 ```
 
-
+#Installation Instructions
 
 [Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
 
@@ -44,8 +46,6 @@ Error message I kept getting:
 libcuda.so.1 is not a symbolic link
 
 Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
-
-
 
 
 # Installing Dependencies
@@ -308,10 +308,22 @@ Once you have added that repository, run these commands to install catkin_tools:
 $ sudo apt-get update
 $ sudo apt-get install python-catkin-tools
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 -----
-#### NASA Original Documentation Begins Here
+# NASA Original Documentation Begins Here
 -----
-# Astrobee Robot Software
+## Astrobee Robot Software
 
 ### About
 
