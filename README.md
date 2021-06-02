@@ -214,7 +214,47 @@ Call Stack (most recent call first):
 -- Configuring incomplete, errors occurred!
 See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
 ```
-It seems unable to find JSONC now. Ugh. 
+It seems unable to find JSONC now. Ugh.
+
+Trying `sudo apt-get install libjson0 libjson0-dev` This worked. New Error:
+
+```
+CMake Error at /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
+  Could NOT find ARGTABLE2 (missing: ARGTABLE2_LIBRARY ARGTABLE2_INCLUDE_DIR)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:388 (_FPHSA_FAILURE_MESSAGE)
+  cmake/FindARGTABLE2.cmake:39 (find_package_handle_standard_args)
+  CMakeLists.txt:257 (find_package)
+```
+
+`sudo apt-get install libargtable2-dev` fixed this error. 
+
+At this point, it seems that the issue is the dev packages for the dependencies not being installed correctly. I can see the ones I still need to install at ~/astrobee/cmake/.
+
+
+
+
+New Error:
+```
+Traceback (most recent call last):
+  File "/home/jkell/astrobee_build/native/catkin_generated/generate_cached_setup.py", line 19, in <module>
+    from catkin.environment_cache import generate_environment_script
+ImportError: No module named catkin.environment_cache
+CMake Error at cmake/catkin/safe_execute_process.cmake:11 (message):
+  execute_process(/usr/bin/python
+  "/home/jkell/astrobee_build/native/catkin_generated/generate_cached_setup.py")
+  returned error code 1
+Call Stack (most recent call first):
+  cmake/catkin/all.cmake:185 (safe_execute_process)
+  cmake/catkin2Config.cmake:37 (include)
+  CMakeLists.txt:311 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
+```
+
+
 
 -----
 #### NASA Original Documentation Begins Here
