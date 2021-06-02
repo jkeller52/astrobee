@@ -280,8 +280,18 @@ Call Stack (most recent call first):
 ```
 This seems to be a common hair-pulling issue for installing ROS Melodic. 
 
+# Installing catkin_tools to fix the above error
 
-
+First you must have the ROS repositories which contain the .deb for catkin_tools:
+```
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
+$ wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+```
+Once you have added that repository, run these commands to install catkin_tools:
+```
+$ sudo apt-get update
+$ sudo apt-get install python-catkin-tools
+```
 -----
 #### NASA Original Documentation Begins Here
 -----
