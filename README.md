@@ -64,8 +64,77 @@ jkell@DESKTOP-CSDA0LG:~$ pkg-config --modversion opencv
 
 
 
+To install a suitable version of OpenCV (anything above 3 won't work):
+```
+wget https://github.com/opencv/opencv/archive/3.4.12.zip
+unzip 3.4.12.zip
+cd opencv-3.4.12
+mkdir build
+cd build
+cmake ../
+sudo make install
+```
+
+After, test that it is recognized by the astrobee build:
+```
+cd ~/astrobee
+./scripts/configure.sh -l -F -D
+```
+
+My output read:
+```
+jkell@DESKTOP-CSDA0LG:~/astrobee$ ./scripts/configure.sh -l -F -D
+configuring for native linux...
+Remove the CMake Cache for /home/jkell/astrobee_build/native
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/home/jkell/astrobee_install/native -DUSE_DDS=off -DENABLE_PICOFLEXX=off /home/jkell/astrobee
+ROS distro variable not set. Trying to figure it out...
+-- Performing Test COMPILER_SUPPORTS_CXX11
+-- Performing Test COMPILER_SUPPORTS_CXX11 - Success
+-- Performing Test COMPILER_SUPPORTS_CXX0X
+-- Performing Test COMPILER_SUPPORTS_CXX0X - Success
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp
+-- Found Glog: /usr/include
+-- Performing Test GFLAGS_IN_GOOGLE_NAMESPACE
+-- Performing Test GFLAGS_IN_GOOGLE_NAMESPACE - Success
+-- Found Gflags: /usr/include
+-- Found Threads: TRUE
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+-- Found ceres: /usr/lib/libceres.so
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.8")
+-- Found Luajit20: /usr/local/lib/libluajit-5.1.so;/usr/lib/x86_64-linux-gnu/libm.so (found version "2.0.4")
+-- Found OpenCV: /usr/local (found suitable version "3.4.10", minimum required is "3")
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   serialization
+--   system
+--   filesystem
+--   thread
+--   program_options
+--   date_time
+--   timer
+--   chrono
+--   regex
+--   atomic
+-- GTSAM include directory:  /usr/share/gtsam/cmake/../../../include
+-- Found jsoncpp: /usr/include/jsoncpp
+CMake Error at /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
+  Could NOT find USB (missing: USB_LIBRARY USB_INCLUDE_DIR)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake:388 (_FPHSA_FAILURE_MESSAGE)
+  cmake/FindUSB.cmake:39 (find_package_handle_standard_args)
+  CMakeLists.txt:255 (find_package)
 
 
+-- Configuring incomplete, errors occurred!
+See also "/home/jkell/astrobee_build/native/CMakeFiles/CMakeOutput.log".
+```
+Better... Now to troubleshhot my new errors.
 
 
 
