@@ -35,7 +35,7 @@ $sudo apt-get -y install cuda
 ```
 -----
 
-# Installation Instructions
+## Installation Instructions
 
 So far, I followed official nasa install docs until hitting an error.
 
@@ -43,7 +43,7 @@ An error message appeared after `./build_install_debians.sh` completes:
 `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
 
 
-Solution Steps:
+### Solution Steps:
 
 First, we'll need to disable automount in /etc/wsl.conf. My WSL2 build did not have this file, but yours might in native Ubuntu 16.04.
   [automount]
@@ -70,15 +70,27 @@ This should fix the issue.
 [source](https://github.com/microsoft/WSL/issues/5548)
 
 
-# Build Issues
+## Build Issues
 
-Errors:
+I encountered my first error once the build was 6% compiled. 
 ```
 /usr/include/gazebo-7/gazebo/msgs/altimeter.pb.h:19:2: error: #error regenerate this file with a newer version of protoc.
  #error regenerate this file with a newer version of protoc.
  ```
  I verified that I had Protoc 3.17.2 (the newest version at time of writing) installed. I am suprised to see it says I need a newer version of protoc. Maybe I really need an older version since this is running Ubuntu 16.04? Will test with Protoc 3.16.0. 
- 
+
+This time (w/ protoc 3.16.0) it compiled to 40% before failing. 
+Output:
+```
+simulation/CMakeFiles/gazebo_system_plugin_client.dir/build.make:62: recipe for target 'simulation/CMakeFiles/gazebo_system_plugin_client.dir/src/gazebo_system_plugin_client/gazebo_system_plugin_client.cc.o' failed
+make[2]: *** [simulation/CMakeFiles/gazebo_system_plugin_client.dir/src/gazebo_system_plugin_client/gazebo_system_plugin_client.cc.o] Error 1
+CMakeFiles/Makefile2:18378: recipe for target 'simulation/CMakeFiles/gazebo_system_plugin_client.dir/all' failed
+make[1]: *** [simulation/CMakeFiles/gazebo_system_plugin_client.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2
+```
+
+Looks like a problem for later. 
 
 
 
@@ -104,8 +116,24 @@ sudo ldconfig # refresh shared library cache.
 You can check that this worked by running the following command: `$ protoc --version`
 `libprotoc 3.17.2`
 [source](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
+
 ### Protoc
-Error: Protoc not found
+Error message reads something similar to `Error: Protoc not found`
+
+First, install some prerequisites:
+`sudo apt-get install autoconf automake libtool curl make g++ unzip`
+
+Then install your version of choice of protoc, unzip it, and change into the directory.
+
+Then run:
+```
+ ./configure
+ make
+ make check
+ sudo make install
+ sudo ldconfig # refresh shared library cache.
+~~
+
 [Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
 
 ### Luajit20
