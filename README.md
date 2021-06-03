@@ -14,7 +14,7 @@ Contents
 
 ## Operating System
 
-#### Ubuntu 16.04 (recommended)
+### Ubuntu 16.04 (recommended)
 A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA.
 
 
@@ -33,6 +33,7 @@ $sudo apt-key add /var/cuda-repo-ubuntu1604-11-3-local/7fa2af80.pub
 $sudo apt-get update
 $sudo apt-get -y install cuda
 ```
+-----
 
 #Installation Instructions
 
@@ -41,33 +42,44 @@ $sudo apt-get -y install cuda
 
 
 
-
+- Follow official nasa install docs
 Error message appears after `./build_install_debians.sh` completes:
 `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
-Steps [source](https://github.com/microsoft/WSL/issues/5548)
+Steps: [source](https://github.com/microsoft/WSL/issues/5548)
 
 disable automount in /etc/wsl.conf
   [automount]
   ldconfig = false
 
 copy /usr/lib/wsl/lib to /usr/lib/wsl2/lib (in wsl, writable)
-`sudo cp -R /usr/lib/wsl/lib /usr/lib/wsl2/lib`
+`sudo cp -r /usr/lib/wsl/lib /usr/lib/wsl2/`
 
 edit /etc/ld.so.conf.d/ld.wsl.conf
 `sudo nano /etc/ld.so.conf.d/ld.wsl.conf`
 
 change /usr/lib/wsl/lib --> /usr/lib/wsl2/lib (new location)
 
-rm /usr/lib/wsl2/lib/libcuda.so.1 and sudo ldconfig
-
+`sudo rm /usr/lib/wsl2/lib/libcuda.so.1` and `sudo ldconfig`
+This should fix the issue. 
 (works for CUDA in WSL, but "Segmentation fault" in DirectML)
 
 
-# Coudln't get past this part w/ the new ubuntu install. Gonna call it a night. Current problem: copying /usr/lib/wsl/lib to wsl2/lib. Muffed it all up by trying to skip a step. 
+# Build Issues
+
+Errors:
+```
+/usr/include/gazebo-7/gazebo/msgs/altimeter.pb.h:19:2: error: #error regenerate this file with a newer version of protoc.
+ #error regenerate this file with a newer version of protoc.
+ ```
+ I verified that I had Protoc 3.17.2 (the newest version at time of writing) installed. I am suprised to see it says I need a newer version of protoc. Maybe I really need an older version since this is running Ubuntu 16.04? Will test with Protoc 3.16.0. 
+ 
 
 
 
-# Installing Dependencies
+
+
+
+# Dependency Issues
 
 ### Protobuf
 To fix this we must install some prerequisites:
