@@ -15,7 +15,7 @@ Contents
 ## Operating System
 
 #### Ubuntu 16.04 (recommended)
-
+A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA.
 
 
 
@@ -49,10 +49,30 @@ $sudo apt-get -y install cuda
 
 Error message appears after `./build_install_debians.sh` completes:
 `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
+Steps [source](https://github.com/microsoft/WSL/issues/5548)
+
+disable automount in /etc/wsl.conf
+  [automount]
+  ldconfig = false
+
+copy /usr/lib/wsl/lib to /usr/lib/wsl2/lib (in wsl, writable)
+
+edit /etc/ld.so.conf.d/ld.wsl.conf
+
+change /usr/lib/wsl/lib --> /usr/lib/wsl2/lib (new location)
+
+rm /usr/lib/wsl2/lib/libcuda.so.# and sudo ldconfig
+
+(works for CUDA in WSL, but "Segmentation fault" in DirectML)
+
+
+
+
+# Installing Dependencies
+
+### Protobuf
 To fix this we must install some prerequisites:
 `sudo apt-get install autoconf automake libtool curl make g++ unzip`
-
-
 Then: 
 ```
 cd ~
@@ -65,12 +85,8 @@ sudo make install
 sudo ldconfig # refresh shared library cache.
 ```
 You can check that this worked by running the following command: `$ protoc --version`
-libprotoc 3.6.1
-Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
-
-
-# Installing Dependencies
-
+`libprotoc 3.17.2`
+[source](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
 ### Protoc
 Error: Protoc not found
 [Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
