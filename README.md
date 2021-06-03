@@ -36,12 +36,7 @@ $sudo apt-get -y install cuda
 
 #Installation Instructions
 
-
-
-
-
-
-[Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
+[Tutorial/install walkthrough](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
 
 
 
@@ -56,15 +51,19 @@ disable automount in /etc/wsl.conf
   ldconfig = false
 
 copy /usr/lib/wsl/lib to /usr/lib/wsl2/lib (in wsl, writable)
+`sudo cp -R /usr/lib/wsl/lib /usr/lib/wsl2/lib`
 
 edit /etc/ld.so.conf.d/ld.wsl.conf
+`sudo nano /etc/ld.so.conf.d/ld.wsl.conf`
 
 change /usr/lib/wsl/lib --> /usr/lib/wsl2/lib (new location)
 
-rm /usr/lib/wsl2/lib/libcuda.so.# and sudo ldconfig
+rm /usr/lib/wsl2/lib/libcuda.so.1 and sudo ldconfig
 
 (works for CUDA in WSL, but "Segmentation fault" in DirectML)
 
+
+# Coudln't get past this part w/ the new ubuntu install. Gonna call it a night. Current problem: copying /usr/lib/wsl/lib to wsl2/lib. Muffed it all up by trying to skip a step. 
 
 
 
