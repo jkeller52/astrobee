@@ -36,15 +36,36 @@ $sudo apt-get -y install cuda
 
 #Installation Instructions
 
+
+
+
+
+
 [Tutorial/use case](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
 
 
 
 
 
-Error message I kept getting:
-libcuda.so.1 is not a symbolic link
+Error message appears after `./build_install_debians.sh` completes:
+`/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
+To fix this we must install some prerequisites:
+`sudo apt-get install autoconf automake libtool curl make g++ unzip`
 
+
+Then: 
+```
+cd ~
+wget https://github.com/protocolbuffers/protobuf/releases/download/v3.17.2/protobuf-all-3.17.2.zip
+unzip protobuf-all-3.17.2.zip && cd protobuf-3.17.2
+./configure
+make
+make check
+sudo make install
+sudo ldconfig # refresh shared library cache.
+```
+You can check that this worked by running the following command: `$ protoc --version`
+libprotoc 3.6.1
 Resolved this error message by folling [these instructions](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
 
 
