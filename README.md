@@ -35,33 +35,39 @@ $sudo apt-get -y install cuda
 ```
 -----
 
-#Installation Instructions
+# Installation Instructions
 
-[Tutorial/install walkthrough](https://titanwolf.org/Network/Articles/Article?AID=45ca0918-e636-47e7-9c18-649bcb515a8c#gsc.tab=0)
+So far, I followed official nasa install docs until hitting an error.
 
-
-
-
-- Follow official nasa install docs
-Error message appears after `./build_install_debians.sh` completes:
+An error message appeared after `./build_install_debians.sh` completes:
 `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
-Steps: [source](https://github.com/microsoft/WSL/issues/5548)
 
-disable automount in /etc/wsl.conf
+
+Solution Steps:
+
+First, we'll need to disable automount in /etc/wsl.conf. My WSL2 build did not have this file, but yours might in native Ubuntu 16.04.
   [automount]
   ldconfig = false
 
-copy /usr/lib/wsl/lib to /usr/lib/wsl2/lib (in wsl, writable)
+The, copy /usr/lib/wsl/lib to /usr/lib/wsl2/ (in wsl, writable)
 `sudo cp -r /usr/lib/wsl/lib /usr/lib/wsl2/`
 
-edit /etc/ld.so.conf.d/ld.wsl.conf
+Next, we'll edit /etc/ld.so.conf.d/ld.wsl.conf and change change "/usr/lib/wsl/lib" --> "/usr/lib/wsl2/lib" (new location)
 `sudo nano /etc/ld.so.conf.d/ld.wsl.conf`
 
-change /usr/lib/wsl/lib --> /usr/lib/wsl2/lib (new location)
 
+
+
+
+
+Then run:
 `sudo rm /usr/lib/wsl2/lib/libcuda.so.1` and `sudo ldconfig`
+
+
 This should fix the issue. 
-(works for CUDA in WSL, but "Segmentation fault" in DirectML)
+(note: works for CUDA in WSL, but "Segmentation fault" in DirectML)
+
+[source](https://github.com/microsoft/WSL/issues/5548)
 
 
 # Build Issues
