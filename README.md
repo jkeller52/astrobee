@@ -132,6 +132,7 @@ Then run:
  make check
  sudo make install
  sudo ldconfig # refresh shared library cache.
+ ```
 ~~
 
 [Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
