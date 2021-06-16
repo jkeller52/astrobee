@@ -90,10 +90,25 @@ Makefile:138: recipe for target 'all' failed
 make: *** [all] Error 2
 ```
 
-Looks like a problem for later. 
 
+The issue was protoc was installed twice, with version conflicts. 
 
+[GitHub Post Comment](https://github.com/BVLC/caffe/issues/6527)
+"I had the same problem, I came to know that there was a conflict between two versions of the protobuf installed via apt-get and from the source.
+I checked via :
+for apt-get:
+export PATH=/usr/bin:$PATH
+protoc --version
 
+and for source:
+export PATH=/usr/local/bin:$PATH
+protoc --version
+
+then removed the one installed through source,next I checked again and both were the same version.
+after that I used make clean, and then make test, and voila! the problem solved for my case."
+
+Tried to remake the build, didn't seem to help. Will delete repo and try again after recloning to make sure build files are new.
+Update: This didn't fix the issue. Maybe I will try a fresh install of Ubuntu?
 
 
 
