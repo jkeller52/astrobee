@@ -168,6 +168,8 @@ Add `LIBGL_ALWAYS_INDIRECT=1` to the bottom.
 Also, when starting VcXsrv add `-nowgl` as a parameter. This allowed Gazebo to run standalone. Now trying to run Astrobee with Gazebo sim. 
 
 
+Success!!!
+Was able to launch the Gazebo simulation of Astrobee.
 
 
 
@@ -181,7 +183,8 @@ Also, when starting VcXsrv add `-nowgl` as a parameter. This allowed Gazebo to r
 
 
 
-# Dependency Issues
+
+# Dependency Issues - May or may not encounter these
 
 ### Protobuf
 To fix this we must install some prerequisites:
