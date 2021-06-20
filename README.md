@@ -108,14 +108,14 @@ then removed the one installed through source,next I checked again and both were
 after that I used make clean, and then make test, and voila! the problem solved for my case."
 
 Tried to remake the build, didn't seem to help. Will delete repo and try again after recloning to make sure build files are new.
-Update: This didn't fix the issue. Maybe I will try a fresh install of Ubuntu?
+Update: This didn't fix the issue.
 
 
 
 
 
 Used [this comment](https://www.programmersought.com/article/5205483999/) to fix protoc versioning issues, re-attempted to make the build. 
-
+Seems to be working correctly now. Note, I did have to fix the 'Libcuda is not a symbolic link' error in order to get this to work.
 
 
 # Dependency Issues
