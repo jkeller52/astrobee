@@ -112,6 +112,12 @@ Update: This didn't fix the issue. Maybe I will try a fresh install of Ubuntu?
 
 
 
+
+
+Used [this comment](https://www.programmersought.com/article/5205483999/) to fix protoc versioning issues, re-attempted to make the build. 
+
+
+
 # Dependency Issues
 
 ### Protobuf
