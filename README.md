@@ -2,7 +2,7 @@
 # Astrobee Software Installation and Configuration
 This repository documents installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation. The Cognitive Systems Engineering Laboratory at Ohio State University is currently exploring the development of an experimental human-machine teaming testbed using ROS and Gazebo, prompting exploration into NASA's open source astrobee software.
 
-If you are unfamiliar with astrobee, please refer to [NASA's official documentation](https://github.com/nasa/astrobee). This repository addresses and troubleshoots problems encountered when following NASA's official [installation documentation](https://nasa.github.io/astrobee/html/install-nonNASA.html)), supporting the install of astrobee simulation capabilities on both native Ubuntu 16.04 and Ubuntu 16.04 ran via Windows Subsystem for Linux 2 (WSL2). It is our hope that other researchers and hobbyists will be able to utilize this information to support exploration of the astrobee platform. 
+If you are unfamiliar with astrobee, please refer to [NASA's official documentation](https://github.com/nasa/astrobee). This repository addresses and troubleshoots problems encountered when following NASA's official [installation documentation](https://nasa.github.io/astrobee/html/install-nonNASA.html)), supporting the install of astrobee simulation capabilities on both native Ubuntu 16.04 and Ubuntu 16.04 ran via Windows Subsystem for Linux 2 (WSL2). It is our hope that other researchers and hobbyists will be able to utilize this information to support exploration of the astrobee platform and associated topics in human-robot interaction. 
 
 Contents
 - [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
@@ -15,15 +15,15 @@ Contents
 ## Operating System
 
 ### Ubuntu 16.04 (recommended)
-A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA.
+A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA. For more information about installing Ubuntu, visit the [official documentation](https://ubuntu.com/tutorials/install-ubuntu-desktop-1604#1-overview)
 
 
 
 #### Windows Subsystem for Linux Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
-I used Windows Subsystem for Linux 2 (WSL2) to act as an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU may have different driver requirements.
+I used Windows Subsystem for Linux 2 (WSL2) to run an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU may have different driver requirements or be incompatible entirely. 
 
-In your Ubuntu terminal: run the following commands:
+To install the CUDA Driver, run the following commands in your Ubuntu terminal: 
 ```
 $wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
 $sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -37,7 +37,7 @@ $sudo apt-get -y install cuda
 
 ## Installation Instructions
 
-So far, I followed official nasa install docs until hitting an error.
+Using WSL2 running an Ubuntu 16.04 VM, I was able to follow official NASA install docs until hitting an error.
 
 An error message appeared after `./build_install_debians.sh` completes:
 `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
@@ -48,11 +48,13 @@ An error message appeared after `./build_install_debians.sh` completes:
 First, we'll need to disable automount in /etc/wsl.conf. My WSL2 build did not have this file, but yours might in native Ubuntu 16.04.
   [automount]
   ldconfig = false
+  
+If you don't have this file in your build, feel free to move on to the next step. 
 
-The, copy /usr/lib/wsl/lib to /usr/lib/wsl2/ (in wsl, writable)
+Next, copy /usr/lib/wsl/lib to /usr/lib/wsl2/ (in wsl, writable)
 `sudo cp -r /usr/lib/wsl/lib /usr/lib/wsl2/`
 
-Next, we'll edit /etc/ld.so.conf.d/ld.wsl.conf and change change "/usr/lib/wsl/lib" --> "/usr/lib/wsl2/lib" (new location)
+Then, we'll edit /etc/ld.so.conf.d/ld.wsl.conf and change change "/usr/lib/wsl/lib" --> "/usr/lib/wsl2/lib" (new location)
 `sudo nano /etc/ld.so.conf.d/ld.wsl.conf`
 
 
@@ -67,7 +69,7 @@ Then run:
 This should fix the issue. 
 (note: works for CUDA in WSL, but "Segmentation fault" in DirectML)
 
-[source](https://github.com/microsoft/WSL/issues/5548)
+[Source for issue solution](https://github.com/microsoft/WSL/issues/5548)
 
 
 ## Build Issues
@@ -77,7 +79,7 @@ I encountered my first error once the build was 6% compiled.
 /usr/include/gazebo-7/gazebo/msgs/altimeter.pb.h:19:2: error: #error regenerate this file with a newer version of protoc.
  #error regenerate this file with a newer version of protoc.
  ```
- I verified that I had Protoc 3.17.2 (the newest version at time of writing) installed. I am suprised to see it says I need a newer version of protoc. Maybe I really need an older version since this is running Ubuntu 16.04? Will test with Protoc 3.16.0. 
+I verified that I had Protoc 3.17.2 (the newest version at time of writing) installed. I am suprised to see it says I need a newer version of protoc. Maybe I really need an older version since this is running Ubuntu 16.04? Will test with Protoc 3.16.0. 
 
 This time (w/ protoc 3.16.0) it compiled to 40% before failing. 
 Output:
@@ -116,6 +118,51 @@ Update: This didn't fix the issue.
 
 Used [this comment](https://www.programmersought.com/article/5205483999/) to fix protoc versioning issues, re-attempted to make the build. 
 Seems to be working correctly now. Note, I did have to fix the 'Libcuda is not a symbolic link' error in order to get this to work.
+
+
+
+Now, the build compiled correctly, and I've moved on to simulating the robot in Gazebo. 
+
+
+
+The issue is with the graphics cofiguration. 
+
+First, I had to 
+
+
+When trying to run `roslaunch astrobee sim.launch dds:=false robot:=sim_pub rviz:=true`
+
+I got the following error message:
+```
+QXcbConnection: Could not connect to display
+```
+I found a workaround for getting GUI's to work on WSL2 
+-(Install VcXsrv, then run XLaunch)[https://github.com/ipython/ipython/issues/10627]
+
+
+Then I had the error: 
+```
+libGL error: No matching fbConfigs or visuals found 
+libGL error: failed to load driver: swrast
+```
+Which is a WSL2 problem related to graphics. Can be fixed by this:
+(How to install xserver to visualize Gazebo/rviz)[https://github.com/Adriankhl/wsl2-xwin-audio]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Dependency Issues
