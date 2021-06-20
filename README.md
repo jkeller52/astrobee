@@ -147,9 +147,25 @@ libGL error: failed to load driver: swrast
 ```
 Which is a WSL2 problem related to graphics. Can be fixed by this:
 (How to install xserver to visualize Gazebo/rviz)[https://github.com/Adriankhl/wsl2-xwin-audio]
+Update: This didn't work yet. 
 
 
+Tried
+```
+$ sudo apt install ubuntu-desktop mesa-utils
+$ export DISPLAY=localhost:0
+$ glxgears
+```
 
+This didn't fix the problem, but the following did:
+
+Adding a line to bashrc 
+```
+$ sudo nano ~/.bashrc
+```
+Add `LIBGL_ALWAYS_INDIRECT=1` to the bottom.
+
+Also, when starting VcXsrv add `-nowgl` as a parameter. This allowed Gazebo to run standalone. Now trying to run Astrobee with Gazebo sim. 
 
 
 
