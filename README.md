@@ -6,10 +6,10 @@ If you are unfamiliar with astrobee, please refer to [NASA's official documentat
 
 Contents
 - [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
-- [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
-- [Missing Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#installing-dependencies)
-- [Use Case](https://github.com/jkeller52/astrobee/blob/master/README.md#use-case)
-- [Original NASA Documentation](https://nasa.github.io/astrobee/html/install-nonNASA.html)
+- [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#libcuda-error)
+- [Build Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#build-issues)
+- [Simulation](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
+
 
 
 ## Operating System
