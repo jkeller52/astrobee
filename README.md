@@ -6,6 +6,8 @@ If you are unfamiliar with astrobee, please refer to [NASA's official documentat
 
 Contents
 * [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
+  * [Ubuntu 16.04 Native (x84_64)]((https://github.com/jkeller52/astrobee/blob/master/README.md#Ubuntu-16.04-(recommended))
+  * [Windows Subsystem for Linux 2 (WSL2) Ubuntu 16.04 VM (x84_64)](https://github.com/jkeller52/astrobee/blob/master/README.md#WSL2-Configuration-(Optional))
 * [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
   * [Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
   * [Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
@@ -22,7 +24,7 @@ Contents
 A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA. For more information about installing Ubuntu, visit the [official documentation](https://ubuntu.com/tutorials/install-ubuntu-desktop-1604#1-overview)
 
 
-### Windows Subsystem for Linux Configuration (Optional)
+### WSL2 Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
 I used Windows Subsystem for Linux 2 (WSL2) to run an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU might have different driver requirements or may be incompatible for WSL2. 
 
