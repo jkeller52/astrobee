@@ -581,7 +581,7 @@ pushd $BUILD_PATH
 source devel/setup.bash
 ```
 ### Getting Started
-The robot spawns in a docked state. To undock, run the following command:
+The robot spawns in a docked state. To undock, run the following command in the terminal:
 `rosrun executive teleop_tool -undock`
 
 Now we can move the robot!
