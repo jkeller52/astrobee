@@ -20,7 +20,6 @@ Contents
 A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA. For more information about installing Ubuntu, visit the [official documentation](https://ubuntu.com/tutorials/install-ubuntu-desktop-1604#1-overview)
 
 
-
 ### Windows Subsystem for Linux Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
 I used Windows Subsystem for Linux 2 (WSL2) to run an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU might have different driver requirements or may be incompatible for WSL2. 
@@ -58,13 +57,13 @@ git submodule update --init --depth 1 description/media
 popd
 ```
 
-Note: Since CSEL will be performing guest science, the astrobee_android respotiory will beed to be cloned eventually. 
+Note: Since CSEL will be performing guest science, the astrobee_android respotiory will beed to be cloned eventually and these instructions will be updated. 
 
 
 
 ### Dependencies
 
-
+Run the following commands one at a time to install required dependencies:
 ```
 $ pushd $SOURCE_PATH
 $ cd scripts/setup
@@ -85,26 +84,22 @@ After running the command `./build_install_debians.sh`, an error occured:
 
 
 To solve this, we'll need to disable automount in /etc/wsl.conf. My WSL2 build did not have this file, but yours might in native Ubuntu 16.04.
-Run `cd /etc/` then `sudo nano wsl.conf`. If the file is empty, that means it doesn't exist and you can move on to the next step. 
+
+Run `cd /etc/` then `sudo nano wsl.conf`. If the file is empty, that means it doesn't exist and you can move on to the next step.
+If the file contains text, change the value 'ldconfig = true' to 'ldconfig = false'.
 
 
-If the file exists, change the value 'ldconfig = true' to 'ldconfig = false'.
 
-
-
-Next, we'll copy a folder to WSL2:
+Next, we'll copy a folder:
 `sudo cp -r /usr/lib/wsl/lib /usr/lib/wsl2/`
 
-Then, we'll edit /etc/ld.so.conf.d/ld.wsl.conf and change "/usr/lib/wsl/lib" --> "/usr/lib/wsl2/lib" (new location)
-`sudo nano /etc/ld.so.conf.d/ld.wsl.conf`
+Then, we'll edit /etc/ld.so.conf.d/ld.wsl.conf and change some text
+`sudo nano /etc/ld.so.conf.d/ld.wsl.conf` and change "/usr/lib/wsl/lib" --> "/usr/lib/wsl2/lib" (new location)
 
 Then run:
 `sudo rm /usr/lib/wsl2/lib/libcuda.so.1` and `sudo ldconfig`
 
-
-This should fix the issue. 
-
-[Source for issue solution](https://github.com/microsoft/WSL/issues/5548)
+This should fix the issue with libcuda. [Source for issue solution](https://github.com/microsoft/WSL/issues/5548)
 
 ### Build
 Once dependencies are properly installed, we need to configure the build. 
@@ -125,29 +120,14 @@ make -j2
 popd
 ```
 
-Upon building the code I received an error that caused it to fail around 30% completion:
+Upon building the code with `make -j2` I received an error that caused it to fail around 30% completion:
 ```
 /usr/include/gazebo-7/gazebo/msgs/altimeter.pb.h:19:2: error: #error regenerate this file with a newer version of protoc.
  #error regenerate this file with a newer version of protoc.
 ```
 
 
-The issue was protoc was installed twice, with version conflicts. apt-get and source seem to have different paths associated, so it's best to check for each to see if conflicting protoc versions are causing problems. 
-
-
-
-for apt-get:
-```
-export PATH=/usr/bin:$PATH
-protoc --version
-```
-and for source:
-```
-export PATH=/usr/local/bin:$PATH
-protoc --version
-```
-
-
+To fix this error, we'll need to reinstall protoc from source:
 1.`$ cd /usr/local/include/google;`
 
 2.`sudo rm -rf protobuf`
@@ -168,13 +148,45 @@ protoc --version
 
 10.`$ sudo ldconfig`
 
-If you haven't already, you will need to fix the 'Libcuda is not a symbolic link' error in order to get this to work.
+(If you haven't already, you will need to fix the 'Libcuda is not a symbolic link' error in order to get this to work.)
 
 
 
 Source for solution: [this comment](https://www.programmersought.com/article/5205483999/)
 
-Now, the build will compile correctly.
+
+If this doesn't work, you may have conflicting versions of protoc installed with different paths associated to each. To check your protoc for duplicate versions, run the following:
+
+for apt-get:
+```
+export PATH=/usr/bin:$PATH
+protoc --version
+```
+and for source:
+```
+export PATH=/usr/local/bin:$PATH
+protoc --version
+```
+
+We'll want to keep protoc 2.6.1 installed from source. To remove protoc installed via apt-get, run the following:
+1.`$ cd /usr/bin/`
+
+2.`sudo rm -rf protobuf`
+
+After following these instructions for protoc, we will need to generate new files for the build using the code from before:
+```
+pushd $SOURCE_PATH
+./scripts/configure.sh -l -F -D
+popd
+```
+
+```
+pushd $BUILD_PATH
+make -j2
+popd
+```
+
+Now, the build should compile correctly.
 
 
 
