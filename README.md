@@ -9,6 +9,7 @@ Contents
 - [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
 -- [Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
 -- [Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
+---[Dependency Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-dependency-issues)
 -- [Build](https://github.com/jkeller52/astrobee/blob/master/README.md#build)
 - [Simulation](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
 
@@ -51,10 +52,10 @@ Then, establish a source path for the code on the machine:
 
 Next, we'll clone the astrobee repository and media:
 ```
-git clone https://github.com/nasa/astrobee.git $SOURCE_PATH
-pushd $SOURCE_PATH
-git submodule update --init --depth 1 description/media
-popd
+$ git clone https://github.com/nasa/astrobee.git $SOURCE_PATH
+$ pushd $SOURCE_PATH
+$ git submodule update --init --depth 1 description/media
+$ popd
 ```
 
 Note: Since CSEL will be performing guest science, the astrobee_android respotiory will beed to be cloned eventually and these instructions will be updated. 
@@ -109,15 +110,15 @@ $ export INSTALL_PATH=$HOME/astrobee_install/native
 ```
 
 ```
-pushd $SOURCE_PATH
-./scripts/configure.sh -l -F -D
-popd
+$ pushd $SOURCE_PATH
+$ ./scripts/configure.sh -l -F -D
+$ popd
 ```
 
 ```
-pushd $BUILD_PATH
-make -j2
-popd
+$ pushd $BUILD_PATH
+$ make -j2
+$ popd
 ```
 
 Upon building the code with `make -j2` I received an error that caused it to fail around 30% completion:
@@ -128,25 +129,26 @@ Upon building the code with `make -j2` I received an error that caused it to fai
 
 
 To fix this error, we'll need to reinstall protoc from source:
-1.`$ cd /usr/local/include/google;`
+
+1.`cd /usr/local/include/google;`
 
 2.`sudo rm -rf protobuf`
 
-3.`$ cd ~ && wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-2.6.1.zip`
+3.`cd ~ && wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-2.6.1.zip`
 
 4. `unzip protobuf-2-6.1.zip && cd protobuf-2.6.1`
 
-5.`$ ./autogen.sh`
+5.`./autogen.sh`
 
-6.`$ ./configure`
+6.`./configure`
 
-7.`$ make`
+7.`make`
 
-8.`$ make check`
+8.`make check`
 
-9.`$ sudo make install`
+9.`sudo make install`
 
-10.`$ sudo ldconfig`
+10.`sudo ldconfig`
 
 (If you haven't already, you will need to fix the 'Libcuda is not a symbolic link' error in order to get this to work.)
 
@@ -159,17 +161,17 @@ If this doesn't work, you may have conflicting versions of protoc installed with
 
 for apt-get:
 ```
-export PATH=/usr/bin:$PATH
-protoc --version
+$ export PATH=/usr/bin:$PATH
+$ protoc --version
 ```
 and for source:
 ```
-export PATH=/usr/local/bin:$PATH
-protoc --version
+$ export PATH=/usr/local/bin:$PATH
+$ protoc --version
 ```
 
 We'll want to keep protoc 2.6.1 installed from source. To remove protoc installed via apt-get, run the following:
-1.`$ cd /usr/bin/`
+1.`cd /usr/bin/`
 
 2.`sudo rm -rf protobuf`
 
