@@ -200,44 +200,6 @@ Now, the build should compile correctly.
 # Installation Dependency Issues 
 You may or may not encounter these, but I documented solutions as I encountered problems. If you were able to successfully compile the build, you can [skip ahead to the next section](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
 
-### Protobuf
-To fix this we must install some prerequisites:
-`sudo apt-get install autoconf automake libtool curl make g++ unzip`
-Then: 
-```
-cd ~
-wget https://github.com/protocolbuffers/protobuf/releases/download/v3.17.2/protobuf-all-3.17.2.zip
-unzip protobuf-all-3.17.2.zip && cd protobuf-3.17.2
-./configure
-make
-make check
-sudo make install
-sudo ldconfig # refresh shared library cache.
-```
-You can check that this worked by running the following command: `$ protoc --version`
-`libprotoc 3.17.2`
-[source](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04
-
-### Protoc
-Error message reads something similar to `Error: Protoc not found`
-
-First, install some prerequisites:
-`sudo apt-get install autoconf automake libtool curl make g++ unzip`
-
-Then install your version of choice of protoc, unzip it, and change into the directory.
-
-Then run:
-```
- ./configure
- make
- make check
- sudo make install
- sudo ldconfig # refresh shared library cache.
- ```
-~~
-
-[Installing Protoc on Ubuntu 16.04](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04)
-
 ### Luajit20
 Error: Luajit20 not found
 `sudo apt install libluajit-5.1-dev`
@@ -260,8 +222,6 @@ Running `sudo apt install libopencv-dev` fixed this issue for me. When I checked
 jkell@DESKTOP-CSDA0LG:~$ pkg-config --modversion opencv
 2.4.9.1
 ```
-
-
 
 
 To install a suitable version of OpenCV (anything above 3 won't work):
