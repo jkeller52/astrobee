@@ -514,6 +514,8 @@ source devel/setup.bash
 From there, we can attempt to run the simulator in Gazebo:
 `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`
 
+### WSL2 Xserver Configuration
+
 When trying to run this command via WSL2, I got the following error message:
 ```
 QXcbConnection: Could not connect to display
@@ -534,18 +536,18 @@ Then run
 ```
 $ export DISPLAY=localhost:0
 ```
+with 'localhost' substituted for your IP address.
 
 
-
-After trying to run the simulator with `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`, I had another error: 
+After trying to run the simulator again with `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`, I had another error: 
 ```
 libGL error: No matching fbConfigs or visuals found 
 libGL error: failed to load driver: swrast
 ```
-This seems to be a WSL2 graphics configuration problem. Can be fixed by adding a line to bashrc along with the parameter we added to VcXsrv. 
+This seems to be another WSL2 graphics configuration problem. It can be fixed by adding a line to bashrc along with the parameter we added to VcXsrv. 
 
 
-Adding a line to bashrc 
+#### Adding a line to bashrc 
 ```
 $ sudo nano ~/.bashrc
 ```
