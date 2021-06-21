@@ -514,7 +514,7 @@ source devel/setup.bash
 From there, we can attempt to run the simulator in Gazebo:
 `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`
 
-### WSL2 Xserver Configuration
+#### WSL2 Xserver Configuration
 
 When trying to run this command via WSL2, I got the following error message:
 ```
@@ -528,7 +528,8 @@ However, there is a workaround for getting GUI's to work on WSL2. First, we will
 ![alt text](https://user-images.githubusercontent.com/43029286/59648627-505d2a80-91b2-11e9-90f9-d8f4c9aa90db.png)
 ![alt text](https://user-images.githubusercontent.com/43029286/59648633-55ba7500-91b2-11e9-8045-c6192214aa84.png)
 ![alt text](https://user-images.githubusercontent.com/43029286/59648638-5a7f2900-91b2-11e9-8963-d97a929e9085.png)
-Add additional parameter: `-nowgl` to VcXsrv
+
+IMPORTANT: Be sure to add additional parameter: `-nowgl` to VcXsrv in the white box in the last image.
 
 Next find your ethernet IPv4 Address (localhost). If you don't know how to do this, simply google it. 
 
@@ -572,14 +573,14 @@ To manipulate the simulation, tools for ROS will need installed.
 $ sudo apt install rosbash
 $ sudo apt install rospack-tools
 ```
-
-In any new terminal, be sure to source the astrobee files. (This includes terminal windows used for teleoperation capabiltiies
+### Sourcing the Files
+In any new terminal, be sure to source the astrobee files. One terminal window is reponsible for running the simulation, so a new window must be used for teleoperation.
 ```
 export BUILD_PATH=$HOME/astrobee_build/native
 pushd $BUILD_PATH
 source devel/setup.bash
 ```
-
+### Getting Started
 The robot spawns in a docked state. To undock, run the following command:
 `rosrun executive teleop_tool -undock`
 
@@ -605,7 +606,7 @@ To move to the dock approach point facing the dock:
 `rosrun executive teleop_tool -move -pos "10.34 -9.51 4.49" -att`
 
 
-## Spawning More Robots
+### Spawning More Robots
 ```
 roslaunch astrobee spawn.launch ns:=bumble dds:=false robot:=sim_pub pose:="11 -7 4.5 0 0 0 1"
 roslaunch astrobee spawn.launch ns:=queen dds:=false robot:=sim_pub pose:="11 -4 4.5 0 0 0 1"
