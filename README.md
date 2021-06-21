@@ -584,6 +584,7 @@ export BUILD_PATH=$HOME/astrobee_build/native
 pushd $BUILD_PATH
 source devel/setup.bash
 ```
+I went ahead and added the above three lines to the bottom of .bashrc, so that it would automatically load upon startup. 
 ### Getting Started
 The robot spawns in a docked state. To undock, run the following command in the terminal:
 `rosrun executive teleop_tool -undock`
