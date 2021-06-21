@@ -1,6 +1,6 @@
 
 # Astrobee Software Installation and Configuration
-This repository documents installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation. The Cognitive Systems Engineering Laboratory at Ohio State University is currently exploring the development of an experimental human-machine teaming testbed using ROS and Gazebo, prompting exploration into NASA's open source astrobee software.
+This repository documents installation and configuration of NASA's Astrobee software for use in ROS and Gazebo simulation. The Cognitive Systems Engineering Laboratory (CSEL) at Ohio State University is currently exploring the development of an experimental human-machine teaming testbed using ROS and Gazebo, prompting exploration into NASA's open source astrobee software.
 
 If you are unfamiliar with astrobee, please refer to [NASA's official documentation](https://github.com/nasa/astrobee). This repository addresses and troubleshoots problems encountered when following NASA's official [installation documentation](https://nasa.github.io/astrobee/html/install-nonNASA.html)), supporting the install of astrobee simulation capabilities on both native Ubuntu 16.04 and Ubuntu 16.04 ran via Windows Subsystem for Linux 2 (WSL2). It is our hope that other researchers and hobbyists will be able to utilize this information to support exploration of the astrobee platform and associated topics in human-robot interaction. 
 
@@ -180,7 +180,7 @@ Now, the build will compile correctly.
 
 
 # Installation Dependency Issues 
-You may or may not encounter these, but I documented solutions as I encountered problems. 
+You may or may not encounter these, but I documented solutions as I encountered problems. If you were able to successfully compile the build, you can [skip ahead to the next section](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
 
 ### Protobuf
 To fix this we must install some prerequisites:
@@ -497,37 +497,39 @@ pushd $BUILD_PATH
 source devel/setup.bash
 ```
 
-From there, we can attempt to run the simulator:
+From there, we can attempt to run the simulator in Gazebo:
 `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`
-This will attempt to open the simulator in Gazebo. 
 
 When trying to run this command via WSL2, I got the following error message:
 ```
 QXcbConnection: Could not connect to display
 ```
 
-However, I found a workaround for getting GUI's to work on WSL2 
--(Install VcXsrv, then run XLaunch)[https://github.com/ipython/ipython/issues/10627]
+However, there is a workaround for getting GUI's to work on WSL2. First, we will next to install VcXsrv.
 
 
-Then I had the error: 
+-(Install VcXsrv, then run XLaunch)[https://github.com/microsoft/WSL/issues/4106]
+![alt text](https://user-images.githubusercontent.com/43029286/59648627-505d2a80-91b2-11e9-90f9-d8f4c9aa90db.png)
+![alt text](https://user-images.githubusercontent.com/43029286/59648633-55ba7500-91b2-11e9-8045-c6192214aa84.png)
+![alt text](https://user-images.githubusercontent.com/43029286/59648638-5a7f2900-91b2-11e9-8963-d97a929e9085.png)
+Add additional parameter: `-nowgl` to VcXsrv
+
+Next find your ethernet IPv4 Address (localhost). If you don't know how to do this, simply google it. 
+
+Then run
+```
+$ export DISPLAY=localhost:0
+```
+
+
+
+After trying to run the simulator with `roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`, I had another error: 
 ```
 libGL error: No matching fbConfigs or visuals found 
 libGL error: failed to load driver: swrast
 ```
-Which is a WSL2 problem related to graphics. Can be fixed by this:
-(How to install xserver to visualize Gazebo/rviz)[https://github.com/Adriankhl/wsl2-xwin-audio]
-Update: This didn't work yet. 
+This seems to be a WSL2 graphics configuration problem. Can be fixed by adding a line to bashrc along with the parameter we added to VcXsrv. 
 
-
-Tried
-```
-$ sudo apt install ubuntu-desktop mesa-utils
-$ export DISPLAY=localhost:0
-$ glxgears
-```
-
-This didn't fix the problem, but the following did:
 
 Adding a line to bashrc 
 ```
@@ -535,15 +537,19 @@ $ sudo nano ~/.bashrc
 ```
 Add `LIBGL_ALWAYS_INDIRECT=1` to the bottom.
 
-Also, when starting VcXsrv add `-nowgl` as a parameter. This allowed Gazebo to run standalone. Now trying to run Astrobee with Gazebo sim. 
+Also, when starting VcXsrv add `-nowgl` as a parameter. 
+
+Then, run `$ export DISPLAY=localhost:0`
+
+Test this by running `gazebo` to see if Gazebo will open. If Gazebo works, we can move on to trying to simulate Astrobee in Gazebo.  
 
 
-Success!!!
-Was able to launch the Gazebo simulation of Astrobee.
 
 
 
 
+
+## Teleoperation Tools
 To manipulate the simulation, tools for ROS will need installed. 
 
 ```
@@ -558,69 +564,29 @@ pushd $BUILD_PATH
 source devel/setup.bash
 ```
 
-
-
-## Configuring Graphics in WSL2 for simulation
-
-I've moved on to simulating the robot in Gazebo. 
-
-
-
-The issue is with the graphics cofiguration. 
-
-
-
-When trying to run `roslaunch astrobee sim.launch dds:=false robot:=sim_pub rviz:=true`
-
-I got the following error message:
-```
-QXcbConnection: Could not connect to display
-```
-I found a workaround for getting GUI's to work on WSL2 
--(Install VcXsrv, then run XLaunch)[https://github.com/ipython/ipython/issues/10627]
-
-
-Then I had the error: 
-```
-libGL error: No matching fbConfigs or visuals found 
-libGL error: failed to load driver: swrast
-```
-Which is a WSL2 problem related to graphics. Can be fixed by this:
-(How to install xserver to visualize Gazebo/rviz)[https://github.com/Adriankhl/wsl2-xwin-audio]
-Update: This didn't work yet. 
-
-
-Tried
-```
-$ sudo apt install ubuntu-desktop mesa-utils
-$ export DISPLAY=localhost:0
-$ glxgears
-```
-
-This didn't fix the problem, but the following did:
-
-Adding a line to bashrc 
-```
-$ sudo nano ~/.bashrc
-```
-Add `LIBGL_ALWAYS_INDIRECT=1` to the bottom.
-
-Also, when starting VcXsrv add `-nowgl` as a parameter. This allowed Gazebo to run standalone. Now trying to run Astrobee with Gazebo sim. 
-
-
-Success!!!
-Was able to launch the Gazebo simulation of Astrobee.
-
-
-
-
-
-## Teleoperation Tools
 The robot spawns in a docked state. To undock, run the following command:
 `rosrun executive teleop_tool -undock`
 
-Then, we can move the robot!
+Now we can move the robot!
 
+To move the robot forward 1, right 2 and down 0.5:
+
+`rosrun executive teleop_tool -move -relative -pos "1 2 0.5"`
+To move the robot back 1:
+
+`rosrun executive teleop_tool -move -relative -pos "-1"`
+
+To rotate the robot around Y (axis X=0 Y=1 Z=0) by -1.5 radians:
+
+`rosrun executive teleop_tool -move -att "-1.5 0 1 0"`
+
+To move to the middle of the JEM:
+
+`rosrun executive teleop_tool -move -pos "11.25 -6.59"`
+
+To move to the dock approach point facing the dock:
+
+`rosrun executive teleop_tool -move -pos "10.34 -9.51 4.49" -att`
 
 
 ## Spawning More Robots
@@ -628,7 +594,15 @@ Then, we can move the robot!
 roslaunch astrobee spawn.launch ns:=bumble dds:=false robot:=sim_pub pose:="11 -7 4.5 0 0 0 1"
 roslaunch astrobee spawn.launch ns:=queen dds:=false robot:=sim_pub pose:="11 -4 4.5 0 0 0 1"
 ```
-Robots spawn under their aliasas "bumble" and "queen", with the default robot being named "honey". 
+
+
+
+
+For multi-robot operations, we'll need to use namespaces. Robots spawn under their aliasas "bumble" and "queen", with the default robot being named "honey". 
+
+Example:
+`rosrun executive teleop_tool -ns "bumble" -undock`
+
 
 
 
