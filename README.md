@@ -9,7 +9,7 @@ Contents
 - [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
 -- [Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
 -- [Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
----[Dependency Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-dependency-issues)
+--[Dependency Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-dependency-issues)
 -- [Build](https://github.com/jkeller52/astrobee/blob/master/README.md#build)
 - [Simulation](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
 
