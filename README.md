@@ -5,11 +5,11 @@ This repository documents installation and configuration of NASA's Astrobee soft
 If you are unfamiliar with astrobee, please refer to [NASA's official documentation](https://github.com/nasa/astrobee). This repository addresses and troubleshoots problems encountered when following NASA's official [installation documentation](https://nasa.github.io/astrobee/html/install-nonNASA.html)), supporting the install of astrobee simulation capabilities on both native Ubuntu 16.04 and Ubuntu 16.04 ran via Windows Subsystem for Linux 2 (WSL2). It is our hope that other researchers and hobbyists will be able to utilize this information to support exploration of the astrobee platform and associated topics in human-robot interaction. 
 
 Contents
-- [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
-- [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
- * [Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
- * [Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
- *  [Dependency Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-dependency-issues)
+* [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
+* [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
+ -[Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
+ -[Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
+ -[Dependency Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-dependency-issues)
 - [Build](https://github.com/jkeller52/astrobee/blob/master/README.md#build)
 - [Simulation](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
 
