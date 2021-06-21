@@ -21,12 +21,12 @@ Contents
 ## Operating System
 
 ### Ubuntu 16.04 (recommended)
-A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA. For more information about installing Ubuntu, visit the [official documentation](https://ubuntu.com/tutorials/install-ubuntu-desktop-1604#1-overview)
+A native Ubuntu 16.04 Operating System is ideal for this installation and recommended by NASA. For more information about installing Ubuntu, visit the [official documentation.](https://ubuntu.com/tutorials/install-ubuntu-desktop-1604#1-overview)
 
 
 ### WSL2 Configuration (Optional)
 If your native machine is using Windows 10, you may want to configure Windows Subsystem for Linux (WSL). https://docs.microsoft.com/en-us/windows/wsl/install-win10
-I used Windows Subsystem for Linux 2 (WSL2) to run an Ubuntu 16.04 VM. This required installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU might have different driver requirements or may be incompatible for WSL2. 
+I used Windows Subsystem for Linux 2 (WSL2) to run an Ubuntu 16.04 VM. This requires installation of the [NVIDIA CUDA Graphics Driver](https://developer.nvidia.com/cuda/wsl/download). Your GPU might have different driver requirements or may be incompatible for WSL2. 
 
 To install the CUDA Driver, run the following commands in your Ubuntu terminal: 
 ```
