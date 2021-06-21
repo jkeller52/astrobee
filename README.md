@@ -565,6 +565,8 @@ Then, run `$ export DISPLAY=localhost:0`
 Test this by running `gazebo` to see if Gazebo will open. If Gazebo works, we can move on to trying to simulate Astrobee in Gazebo.  
 
 
+To try to run the simulator with Gazebo:
+`roslaunch astrobee sim.launch dds:=false robot:=sim_pub sviz:=true`
 
 
 
