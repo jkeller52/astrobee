@@ -476,7 +476,9 @@ source devel/setup.bash
 ```
 
 From there, we can attempt to run the simulator in Gazebo:
-`roslaunch astrobee sim.launch dds:=false robot:sim_pub sviz=true`
+```
+roslaunch astrobee sim.launch dds:=false robot:=sim_pub sviz:=true
+```
 
 #### WSL2 Xserver Configuration
 
