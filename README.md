@@ -197,7 +197,7 @@ Now, the build should compile correctly.
 
 -----
 
-# Installation Dependency Issues 
+### Installation Dependency Issues 
 If you encounter issues with dependencies, visit [this link](https://github.com/jkeller52/astrobee/blob/master/dependency_issues.MD) for documentation and troubleshooting of issues I encountered.
 
 -----
