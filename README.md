@@ -195,11 +195,12 @@ popd
 Now, the build should compile correctly.
 
 
-
+-----
 
 # Installation Dependency Issues 
 If you encounter issues with dependencies, visit [this link](https://github.com/jkeller52/astrobee/blob/master/dependency_issues.MD) for documentation and troubleshooting of issues I encountered.
 
+-----
 
 # Simulation
 To configure the simulation environment, you'll first need to source the astrobee files so ROS can recognize them:
