@@ -15,6 +15,7 @@ If you are unfamiliar with astrobee, please refer to [NASA's official documentat
 * [Build](https://github.com/jkeller52/astrobee/blob/master/README.md#build)
   * [Build Issues](https://github.com/jkeller52/astrobee/blob/master/README.md#build-issues)
 * [Simulation](https://github.com/jkeller52/astrobee/blob/master/README.md#simulation)
+* [GUI for Gazebo](https://github.com/jkeller52/astrobee/blob/master/README.md#astrobee-gui)
 
 -----
 
@@ -331,6 +332,43 @@ Example:
 
 
 
+# astrobee_gui
+To make edits to the GUI, use Qt Creator's design tab to edit form.ui (or main_window.ui in prev version
+
+later: try binder https://mybinder.org/v2/gh/jkeller52/astrobee/HEAD
+
+To save edits in Qt Creator and translate them to Python, run:
+```
+pyuic5 form.ui > mainwindow_auto.py
+```
+
+Then, from the same directory, run `python main.py` to open the GUI.
+
+![AstrobeeGazeboGIF](https://user-images.githubusercontent.com/70432484/124195672-e6fa9c80-da98-11eb-8341-acaf41979678.gif)
+
+
+# Configuring PyQt5 on Ubuntu 16.04
+A challenge in itself, since Astrobee relies heavily on Python 2.7, whereas PyQt5 relies on Python 3.5+. 
+
+`sudo apt install pyqt5-dev-tools pyqt5-dev`
+
+Error I got:
+`QFontDatabase: Cannot find font directory /usr/lib/x86_64-linux-gnu/fonts - is Qt installed correctly?`
+This was fixed by running: `echo "export DISPLAY=:0.0" >> ~/.bashrc`
+
+Then run `sudo sed -i 's$<listen>.*</listen>$<listen>tcp:host=localhost,port=0</listen>$' /etc/dbus-1/session.conf` to fix the [Dbus error message](https://www.reddit.com/r/Windows10/comments/4rsmzp/bash_on_windows_getting_dbus_and_x_server_working/) (if you're running WSL2).
+
+
+
+
+So annoying, still can't fix fonts. 
+```
+jkell@DESKTOP-CSDA0LG:~/astrobee_gui$ python main.py
+QFontDatabase: Cannot find font directory /usr/lib/x86_64-linux-gnu/fonts - is Qt installed correctly?
+QFontDatabase: Cannot find font directory /usr/lib/x86_64-linux-gnu/fonts - is Qt installed correctly?
+QFontDatabase: Cannot find font directory /usr/lib/x86_64-linux-gnu/fonts - is Qt installed correctly?
+```
+Note: I think fonts were fixed by adding a line to ~/.bashrc
 
 
 
