@@ -332,7 +332,7 @@ Example:
 
 
 
-# astrobee_gui
+# Astrobee GUI
 To make edits to the GUI, use Qt Creator's design tab to edit form.ui (or main_window.ui in prev version
 
 later: try binder https://mybinder.org/v2/gh/jkeller52/astrobee/HEAD
