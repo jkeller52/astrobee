@@ -329,8 +329,32 @@ Example:
 
 
 
+## Astrobee Robot Functionality
+
+### Robot arm control (may require Ground Data System - may not work in simulator)
+
+First, we need to calibrate the arm:
+```
+rosrun arm arm_tool -cal
+rosrun arm arm_tool -open
+rosrun arm arm_tool -close
+rosrun arm arm_tool -set 50
+rosrun arm arm_tool -stow
+```
 
 
+Then, we can use the arm
+```
+rosrun arm arm_tool -deploy
+rosrun arm arm_tool -pan 45
+rosrun arm arm_tool -tilt 30
+```
+
+You can find other supported commands by running this: `rosrun arm arm_tool -helpshort`
+
+### Docking
+
+`rosrun dock dock_tool -helpshort` lists commands available. Basically, can dock and undock in Berth 1 and Berth 2.
 
 # Astrobee GUI
 To make edits to the GUI, use Qt Creator's design tab to edit form.ui (or main_window.ui in prev version
