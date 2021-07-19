@@ -8,6 +8,7 @@ If you are unfamiliar with astrobee, please refer to [NASA's official documentat
 * [Operating System](https://github.com/jkeller52/astrobee/blob/master/README.md#operating-system)
   * [Ubuntu 16.04 Native (x84_64)](https://github.com/jkeller52/astrobee/blob/master/README.md#ubuntu-1604-recommended)
   * [Windows Subsystem for Linux 2 - Ubuntu 16.04 VM (x84_64)](https://github.com/jkeller52/astrobee/blob/master/README.md#WSL2-Configuration-Optional)
+  * [VirtualBox Ubuntu Install for Mac OSX](https://www.instructables.com/How-to-Create-an-Ubuntu-Virtual-Machine-with-Virtu/)
 * [Installation Instructions](https://github.com/jkeller52/astrobee/blob/master/README.md#installation-instructions)
   * [Machine Setup](https://github.com/jkeller52/astrobee/blob/master/README.md#machine-setup)
   * [Dependencies](https://github.com/jkeller52/astrobee/blob/master/README.md#dependencies)
